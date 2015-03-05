@@ -1,0 +1,21 @@
+{
+  "name": "marathon-api",
+  "version": "0.0.1",
+  "description": "Marathon V2 API client",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "marathon",
+    "mesos",
+    "cloud",
+    "cluster"
+  ],
+  "author": "Ole-Kenneth Rangnes <ok@rait.no>",
+  "license": "MIT",
+  "dependencies": {
+    "underscore": "~1.8.2",
+    "request-promise": "~0.4.0"
+  }
+}
