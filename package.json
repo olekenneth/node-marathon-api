@@ -17,5 +17,13 @@
   "dependencies": {
     "underscore": "~1.8.2",
     "request-promise": "~0.4.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/olekenneth/node-marathon-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/olekenneth/node-marathon-api/issues"
   }
 }
