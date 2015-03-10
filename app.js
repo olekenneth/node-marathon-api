@@ -1,4 +1,4 @@
-/*global module*/
+/*global console, module*/
 var request = require('request-promise');
 var _ = require('underscore');
 
@@ -26,18 +26,20 @@ Marathon.prototype.getGroupId = function() {
 Marathon.prototype.getInstancesInGroup = function(groupId, success) {
     'use strict';
 
-    request(this.marathonUrl + '/groups/' + groupId)
-        .then(function(res) {
-            return JSON.parse(res);
-        })
+    request({
+        url:  this.marathonUrl + '/groups/' + groupId,
+        json: true
+    })
         .then(function(json) { return json.apps; })
         .map(function getAllTasksForEachAppId(app) {
-            return request(this.marathonUrl + '/apps' + app.id + '/tasks');
+            return request({
+                url:  this.marathonUrl + '/apps' + app.id + '/tasks',
+                json: true
+            }).then(function(json) { return json.tasks; });
         }.bind(this))
-        .then(function(res) {
-            return JSON.parse(res);
+        .then(function(tasks) {
+            return _.flatten(tasks, true);
         })
-        .then(function(json) { return json.tasks; })
         .each(function checkIfTaskIsAlive(task) {
             if (!_.contains(_.pluck(task.healthCheckResults, 'alive'), false)) {
                 return task;
@@ -45,7 +47,7 @@ Marathon.prototype.getInstancesInGroup = function(groupId, success) {
         })
         .map(function(task) {
             return {
-                host: task.host,
+                host:  task.host,
                 ports: task.ports
             };
         })

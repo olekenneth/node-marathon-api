@@ -1,6 +1,6 @@
 {
   "name": "marathon-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Marathon V2 API client",
   "main": "app.js",
   "scripts": {
